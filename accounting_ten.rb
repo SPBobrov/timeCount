@@ -64,7 +64,7 @@ accounting_ten_1 = pty_to_hs(log)
 
 accounting_ten_1_sum = 0
 
-accounting_ten_1.each do |key, value|
+accounting_ten_1.each do |key, value| #это зачем?
 
 end
 
