@@ -62,20 +62,17 @@ log = "./parser_log.txt"
 
 accounting_ten_1 = pty_to_hs(log)
 
-accounting_ten_1_sum = 0
-
-accounting_ten_1.each do |key, value| #это зачем?
-
-end
 
 puts "Результары на сегодня: ruby - #{accounting_ten_1['ruby']}, git -
  #{accounting_ten_1['git']}, linux - #{accounting_ten_1['linux']}, english
   - #{accounting_ten_1['english']}, tools - #{accounting_ten_1['tools']} "
-puts "Всего #{accounting_ten_1_sum}"
 
+accounting_ten_1_sum = 0 # обнуляем начальное значение, чтобы посчитать сумму часов на начало учета
 accounting_ten_1.each do |key, value|
 	accounting_ten_1_sum += value
 end
+
+puts "Всего #{accounting_ten_1_sum}"
 
 puts "Осталось до цели #{10000 - accounting_ten_1_sum} "
 
@@ -83,23 +80,30 @@ print 'Готовы ввести новые данные? Да/нет '
 is_new_data = gets.chomp.downcase
 if is_new_data == 'да' || is_new_data == 'yes'
 
-	accounting_ten_1_sum = 0
-	
+		
 	print 'Введите количество часов ruby - '
-	accounting_ten_1['ruby'] += gets.chomp.to_f
+	ruby_day = gets.chomp.to_f
+	p ruby_day
+	accounting_ten_1['ruby'] += ruby_day
 
 	print 'Введите количество часов git - '
-	accounting_ten_1['git'] += gets.chomp.to_f
+	git_day = gets.chomp.to_f
+	accounting_ten_1['git'] += git_day
 
 	print 'Введите количество часов linux - '
-	accounting_ten_1['linux'] += gets.chomp.to_f
+	linux_day = gets.chomp.to_f
+	accounting_ten_1['linux'] += linux_day
 
 	print 'Введите количество часов english - '
-	accounting_ten_1['english'] += gets.chomp.to_f
+	english_day = gets.chomp.to_f
+	accounting_ten_1['english'] += english_day
 
 	print 'Введите количество часов tools - '
-	accounting_ten_1['tools'] += gets.chomp.to_f
+	tools_day = gets.chomp.to_f
+	accounting_ten_1['tools'] += tools_day
 
+	accounting_ten_1_sum_day = ruby_day + git_day + linux_day + english_day + tools_day
+	accounting_ten_1_sum = 0 # обнуляем начальное значение, чтобы посчитать сумму часов на конец учета
 	accounting_ten_1.each do |key, value|
 	accounting_ten_1_sum += value
 	end
@@ -112,7 +116,9 @@ if is_new_data == 'да' || is_new_data == 'yes'
 	puts "Результары на сегодня: ruby - #{accounting_ten_1['ruby']}, git -
  	#{accounting_ten_1['git']}, linux - #{accounting_ten_1['linux']}, english
   	- #{accounting_ten_1['english']}, tools - #{accounting_ten_1['tools']} "
-	puts "Всего #{accounting_ten_1_sum}"
+
+	puts "Сегодня отработано #{accounting_ten_1_sum_day} часов"
+	puts "Всего за весь период учета #{accounting_ten_1_sum}"
 	puts "Осталось до цели #{10000 - accounting_ten_1_sum} "
 
 	pty_to_txt(accounting_ten_1, log)
