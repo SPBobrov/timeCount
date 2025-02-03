@@ -14,6 +14,7 @@ def write_to_txt(adress, data)
   file = File.new(adress, "a:UTF-8")
   file.print(Time.now)
   file.print(data)
+  file.puts(' ') #переводит строку в log файле
 	file.close
 end
 
@@ -101,7 +102,6 @@ loop do
 
 
   if obj_count == 1
-
     obj_count = 'ruby'
   elsif obj_count == 2
     obj_count = 'english'
@@ -146,6 +146,8 @@ loop do
     
   end
 
-end
   write_to_txt(long_log, day_hs)
+
+end
+  
 end
